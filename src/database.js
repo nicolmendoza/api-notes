@@ -4,7 +4,7 @@ const mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'molinera4',
-    database: 'notesappcompany'
+    database: 'notesapp'
 })
 
 

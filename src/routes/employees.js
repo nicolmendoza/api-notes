@@ -19,6 +19,72 @@ router.get(('/'), (req, res) => {
 
 
 
+router.get('/:id', (req, res) => {
+    const { id } = req.params
+    mysqlConnection.query('select*from notes where id=?', [id], (err, rows, fields) => {
+        if (!err) {
+            res.json(rows)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+
+router.post(('/'), (req, res) => {
+
+    const { id, title, description, type } = req.body
+
+    mysqlConnection.query('call addOrEditNote(?,?,?,?)', [id, title, description, type], (err, rows, fields) => {
+
+        if (!err) {
+            res.json(rows)
+        } else {
+            console.log(err)
+        }
+    })
+
+})
+
+
+
+router.put('/:id', (req, res) => {
+    const { id } = req.params
+    const { title, description, type } = req.body
+    mysqlConnection.query('call addOrEditNote(?,?,?,?)', [id, title, description, type], (err, rows, fields) => {
+        if (!err) {
+            res.json(rows)
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+
+    const { id } = req.params
+    mysqlConnection.query('delete from notes where id=?', [id], (err, rows, fields) => {
+
+        if (!err) {
+            res.json('Deleted')
+        } else {
+            console.log(err)
+        }
+    })
+})
+
+
+// router.delete('/:id', (req, res) => {
+//     const { id } = req.params
+//     mysqlConnection.query('delete from notes where id=?', [id], (err, rows, fields) => {
+//         if (!err) {
+//             res.json('deleted')
+//         } else {
+//             console.log(err)
+//         }
+//     })
+// })
 
 module.exports = router
 
