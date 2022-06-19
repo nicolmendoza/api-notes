@@ -8,6 +8,8 @@ app.use(express.json())
 
 app.use(require('./routes/employees'))
 
+app.use(cors())
+
 app.listen(app.get('port'),()=>{
     console.log('hiii')
 })
